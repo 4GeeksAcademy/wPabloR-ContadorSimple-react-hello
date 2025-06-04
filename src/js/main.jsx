@@ -18,7 +18,7 @@ import Home from './components/Home';
 import Number from './components/Number';
 
 
-
+const root = ReactDOM.createRoot(document.getElementById("root"))
 
 let counter = 0;
 setInterval(function() {
@@ -27,11 +27,14 @@ setInterval(function() {
     const two = Math.floor(counter / 10) % 10;   
     const one = counter % 10;                     
 
-    ReactDOM.createRoot(document.getElementById('root')).render(
+    root.render(
       <React.StrictMode>
-        <div className='container bg-black d-flex justify-content-center p-2'>
+        <div className='container-fluid bg-black d-flex justify-content-center p-3'>
           <Home icon={faClock} />
-          <Number value={four}/>  <Number value={three}/>  <Number value={two}/>  <Number value={one}/> 
+          <Number value={four}/>  
+          <Number value={three}/>  
+          <Number value={two}/>  
+          <Number value={one}/> 
         </div>
       </React.StrictMode>
     );
