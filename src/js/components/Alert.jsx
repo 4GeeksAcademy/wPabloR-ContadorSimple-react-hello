@@ -8,7 +8,7 @@ const Alert = () =>{
 
     return(
         <div>
-            <label className="text-white mx-2">Ingresa el tiempo límite</label>
+            <label className="text-white mx-2">Ingresa el tiempo límite:</label>
             <input typeof="number" onChange={handleChange}></input>
         </div>
 

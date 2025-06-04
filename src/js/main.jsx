@@ -17,14 +17,17 @@ import '../styles/index.css';
 import Home from './components/Home';
 import Number from './components/Number';
 import Alert from './components/Alert';
+import Controllers from './components/Controllers';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
 let counter = 0;
+let intervalId = null;
 window.limit = 0;
 
-setInterval(function() {
+function startCounter(){
+  intervalId = setInterval(function() {
     const four = Math.floor(counter / 1000) % 10; 
     const three = Math.floor(counter / 100) % 10; 
     const two = Math.floor(counter / 10) % 10;   
@@ -42,11 +45,38 @@ setInterval(function() {
         <div className='container-fluid bg-black d-flex justify-content-center p-3'> 
           <Alert/>
         </div>
+        <div className='container-fluid bg-black d-flex justify-content-center p-3'> 
+          <Controllers onStop={stopCounter} onReset={resetCounter} onResume={resumeCounter}/>
+        </div>
       </React.StrictMode>
     );
     counter++;
 
     if (counter === window.limit){
       alert("Has alcazado tu tiempo límite!!")
+      stopCounter()
     }
 }, 1000);
+
+}
+
+
+function stopCounter(){
+  clearInterval(intervalId);
+  intervalId = null
+};
+
+function resetCounter(){
+  stopCounter()
+  counter = 0;
+  startCounter();
+};
+
+function resumeCounter(){
+  if(!intervalId){
+    startCounter();
+  }
+};
+
+
+startCounter();
