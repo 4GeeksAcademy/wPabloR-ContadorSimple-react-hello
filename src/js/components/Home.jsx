@@ -1,28 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Number from "./Number";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+const Home = (props) => {
+  return (
+     <div className="number-box bg-dark rounded-3 d-flex justify-content-center align-items-center p-5 mx-2">
+      <FontAwesomeIcon className="text-white fs-2" icon={props.icon} />
+    </div>
+  );
+};
 
-//create your first component
-const Home = () => {
-	return (
-		<div className="text-center">
-            
-
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+Home.propTypes = {
+  icon: PropTypes.object.isRequired
 };
 
 export default Home;
