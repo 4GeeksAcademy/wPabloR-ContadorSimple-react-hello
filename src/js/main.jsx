@@ -24,10 +24,29 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 
 let counter = 0;
 let intervalId = null;
+let isCountingDown = false;
 window.limit = 0;
 
+
 function startCounter(){
-  intervalId = setInterval(function() {
+  isCountingDown = false;
+  counter = 0;
+  startInterval();
+}
+
+function startCountDown(numb) {
+  isCountingDown = true;
+  counter = numb;
+  startInterval();
+}
+
+function startInterval(){
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+    
+
+  intervalId = setInterval(()=> {
     const four = Math.floor(counter / 1000) % 10; 
     const three = Math.floor(counter / 100) % 10; 
     const two = Math.floor(counter / 10) % 10;   
@@ -46,15 +65,22 @@ function startCounter(){
           <Alert/>
         </div>
         <div className='container-fluid bg-black d-flex justify-content-center p-3'> 
-          <Controllers onStop={stopCounter} onReset={resetCounter} onResume={resumeCounter}/>
+          <Controllers onStop={stopCounter} onReset={resetCounter} onResume={resumeCounter} onStartCountDown={startCountDown}/>
         </div>
       </React.StrictMode>
     );
+    if (isCountingDown){
+      if (counter <= 0){
+        clearInterval(intervalId);
+        alert("El tiempo ha terminado!")
+      } else {
+        counter--;
+      }
+    } else {
+      if (counter === window.limit){
+        alert("Has alcazado tu tiempo límite!!")
+    }
     counter++;
-
-    if (counter === window.limit){
-      alert("Has alcazado tu tiempo límite!!")
-      stopCounter()
     }
 }, 1000);
 
@@ -79,4 +105,4 @@ function resumeCounter(){
 };
 
 
-startCounter();
+startInterval();
