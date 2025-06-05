@@ -61,7 +61,7 @@ function startInterval(){
           <Number value={two}/>  
           <Number value={one}/> 
         </div>
-        <div className='container-fluid bg-black d-flex justify-content-center p-3'> 
+        <div className='container-fluid bg-black d-flex justify-content-center'> 
           <Alert/>
         </div>
         <div className='container-fluid bg-black d-flex justify-content-center p-3'> 
@@ -77,7 +77,7 @@ function startInterval(){
         counter--;
       }
     } else {
-      if (counter === window.limit){
+      if (window.limit > 0 && counter === window.limit){
         alert("Has alcazado tu tiempo límite!!")
     }
     counter++;
